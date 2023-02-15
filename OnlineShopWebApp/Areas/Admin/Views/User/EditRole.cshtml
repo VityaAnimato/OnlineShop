@@ -1,0 +1,23 @@
+﻿@model EditRightsUserViewModel
+
+<div class="row">
+    <div class="col col-3">
+        @await Html.PartialAsync("Menu")
+    </div>
+    <div class="col col-9">
+        <h5 class="display-4">Редактируем роль пользователя @Model.User.UserName</h5>
+        <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
+        <div class="dropdown show">
+            <a class="btn btn-outline-info dropdown-toggle" href="#" data-toggle="dropdown">
+                @Model.User.Role.Name
+            </a>
+            <div class="dropdown-menu">
+                @foreach (var role in Model.Roles)
+                {
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="ConfirmRole" asp-route-oldRole="@Model.User.Role.Name" asp-route-userName="@Model.User.UserName" asp-route-roleName="@role.Name">@role.Name</a>
+                }              
+            </div>
+        </div>
+    </div>
+</div>

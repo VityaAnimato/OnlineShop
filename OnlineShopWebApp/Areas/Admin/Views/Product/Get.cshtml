@@ -1,0 +1,37 @@
+﻿@model List<ProductViewModel>
+<div class="row">
+    <div class="col col-3">
+        @await Html.PartialAsync("Menu")
+    </div>
+    <div class="col col-9">
+        <h5 class="display-4">Список продуктов</h5>
+        <a asp-area="Admin" asp-controller="Product" asp-action="Add">Добавить новый продукт</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Название позиции</th>
+                    <th>Цена</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td></td>
+                        <td><a asp-area="User" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">@product.Name</a></td>
+                        <td>@product.Cost</td>
+                        <td><a asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id">Редактировать</a></td>
+                        <td>
+                            <div class="btn-group">
+                                @await Html.PartialAsync("DeleteConfirmation",product)
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

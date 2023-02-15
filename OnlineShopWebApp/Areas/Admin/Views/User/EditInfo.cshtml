@@ -1,0 +1,27 @@
+﻿@model UserViewModel
+
+<div class="row">
+    <div class="col col-3">
+        @await Html.PartialAsync("Menu")
+    </div>
+    <div class="col col-9">
+        <h5 class="display-4">Редактируем пользователя @Model.UserName</h5>
+        <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
+        <form asp-action="EditInfo" asp-controller="User" asp-area="Admin">
+            <div class="row">
+                <div class="col">
+                    <label asp-for="UserName">Имя пользователя</label><br>
+                    <input type="text" asp-for="UserName" placeholder="@Model.UserName"><br>
+                    <span asp-validation-for="UserName"></span><br>
+                    <input hidden type="text" asp-for="Password" value="@Model.Password"><br>
+                    <input hidden type="text" asp-for="Id" value="@Model.Id"><br>
+                    <input hidden type="text" asp-for="OldUserName" value="@Model.UserName"><br>
+                    <br>
+                    <input type="submit" value="Редактировать"/>
+                    <br>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

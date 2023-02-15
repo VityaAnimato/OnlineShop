@@ -1,0 +1,28 @@
+﻿@model List<ProductViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@*<form method="post">
+    <input type="text" name="SearchString" placeholder="Поиск" />
+    <button class="btn btn-dark" type="submit" asp-controller="Home" asp-action="Search">🔍</button>
+</form>*@
+
+<div class="row">   
+    @foreach (var product in Model)
+    {
+        <div class=" col-3 card shadow">
+            <img class="card-img-top" src=@product.ImagePath>
+
+            <div class="card-body">
+                <a style="color:black" asp-area="User" asp-controller="Product" asp-route-id="@product.Id">
+                    <h5>@product.Name</h5>
+                </a>
+                <h5>@product.Cost руб</h5>
+                <a class="btn btn-dark" asp-area="User" asp-controller="Cart" asp-action="Add" asp-route-productId="@product.Id" role="button">+🛒</a>
+                <a class="btn btn-outline-dark" asp-area="User" asp-controller="Favourite" asp-action="Add" asp-route-productId="@product.Id" role="button">💜</a>
+            </div>
+        </div>
+    }
+</div>
+

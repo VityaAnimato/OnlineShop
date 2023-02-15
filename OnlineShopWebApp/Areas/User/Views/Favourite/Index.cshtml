@@ -1,0 +1,44 @@
+﻿@model List<ProductViewModel>
+@{
+    ViewData["Favourite"] = "Index";
+}
+
+@if (Model == null || Model.Count == 0)
+{
+    <h5 class="display-4">Добавьте что-нибудь в избранное.</h5>
+}
+else
+{
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Название позиции</th>
+                        <th>Описание</th>
+                        <th>Стоимость позиции</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Description</td>
+                            <td>@item.Cost</td>
+                            <td><a class="btn btn-outline-dark" href="/user/favourite/remove?productId=@item.Id" role="button">убрать</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div>
+                <a class="btn btn-dark" asp-area="" asp-controller="Home" asp-action="Index" role="button">Продолжить покупки</a>
+                <a class="btn btn-dark" asp-area="User" asp-controller="Favourite" asp-action="Clear" role="button">Очистить избранное</a>
+            </div>
+        </div>
+    </div>
+
+
+
+}

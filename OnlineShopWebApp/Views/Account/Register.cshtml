@@ -1,0 +1,32 @@
+﻿@model RegData
+
+<h5 class="display-4">Регистрация</h5>
+<div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
+<form asp-action="Register" asp-controller="Account">
+    <div>
+        <div>
+            <label asp-for="UserName">Логин:</label><br>
+            <input type="text" asp-for="UserName"><br>
+            <span asp-validation-for="UserName"></span>
+        </div>
+        <div>
+            <label asp-for="Password">Пароль:</label><br>
+            <input type="password" asp-for="Password"><br>
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div>
+            <label asp-for="ConfirmationPassword">Пароль:</label><br>
+            <input type="password" asp-for="ConfirmationPassword"><br>
+            <span asp-validation-for="ConfirmationPassword"></span>
+        </div>
+        <div>
+            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl"><br>
+        </div>
+        <div>
+            <br>
+            <input type="submit" value="Зарегистрироваться" />
+            <br />
+        </div>
+    </div>
+</form>

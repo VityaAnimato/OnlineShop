@@ -1,0 +1,32 @@
+﻿@model List<UserViewModel>
+<div class="row">
+    <div class="col col-3">
+        @await Html.PartialAsync("Menu")
+    </div>
+    <div class="col col-9">
+        <h5 class="display-4">Список пользователей</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Пользователь</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td><a asp-area="Admin" asp-controller="User" asp-action="GetDetails" asp-route-name="@user.UserName">@user.UserName</a></td>
+                    </tr>
+                    <tr></tr>
+                    <tr></tr>
+                }
+            </tbody>
+        </table>
+        <div>
+            <a class="btn btn-success" asp-area="Admin" asp-controller="User" asp-action="Add">Добавить пользователя</a>
+        </div>          
+    </div>   
+</div>
+

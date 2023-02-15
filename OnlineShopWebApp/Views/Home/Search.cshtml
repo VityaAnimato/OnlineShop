@@ -1,0 +1,40 @@
+﻿@model List<ProductViewModel>
+@{
+    ViewData["Title"] = "Search results";
+}
+
+<form method="post">
+    <input type="text" name="SearchString" placeholder="Поиск" />
+    <button class="btn btn-dark" type="submit" asp-controller="Home" asp-action="Search">🔍</button>
+</form>
+
+@if (Model == null)
+{
+    <h5 class="display-4">Ничего не найдено</h5>
+    return;
+}
+
+<h5 class="display-4">Найдено @Model.Count позиций</h5>
+
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class=" col-3 card shadow">
+            <img class="card-img-top" src=@product.ImagePath>
+
+            <div class="card-body">
+                <a style="color:black" href="/user/product/index/@product.Id">
+                    <h5>@product.Name</h5>
+                </a>
+                <h5>@product.Cost руб</h5>
+                <a class="btn btn-dark" asp-area="User" asp-controller="Cart" asp-action="Add" asp-route-productId="@product.Id" role="button">+🛒</a>
+                <a class="btn btn-outline-dark" asp-area="User" asp-controller="Favourite" asp-action="Add" asp-route-productId="@product.Id" role="button">💜</a>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>

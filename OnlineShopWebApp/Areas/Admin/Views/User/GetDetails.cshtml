@@ -1,0 +1,44 @@
+﻿@model UserViewModel
+<div class="row">
+    <div class="col col-3">
+        @await Html.PartialAsync("Menu")
+    </div>
+    <div class="col col-9">
+        <h5 class="display-4">Пользователь @Model.UserName</h5>
+        <table class="table">
+            <tr>
+                <th>Имя</th>
+                <td>@Model.UserName</td>
+            </tr>
+            <tr>
+                <th>Пароль</th>
+                <td>@Model.Password</td>
+            </tr>
+            <tr>
+                <th>ID</th>
+                <td>@Model.Id</td>
+            </tr>
+            <tr>
+                <th>Роль</th>
+                @foreach (var role in Model.Roles)
+                {
+                    <td>@role</td>
+                }             
+            </tr>
+        </table>
+        <div>
+            <div class="dropdown show">
+                <a class="btn btn-outline-info dropdown-toggle" href="#" data-toggle="dropdown">
+                    Действие
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="EditPassword" asp-route-name="@Model.UserName">Смена пароля</a>
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="EditInfo" asp-route-name="@Model.UserName">Редактирование данных</a>
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="EditRole" asp-route-UserName="@Model.UserName">Права доступа</a>
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Remove" asp-route-name="@Model.UserName">Удалить пользователя</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

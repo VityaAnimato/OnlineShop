@@ -1,0 +1,52 @@
+﻿@using OnlineShop.Db;
+@model OrderViewModel
+
+<div class="row">
+    <div class="col col-3">
+        @await Html.PartialAsync("Menu")
+    </div>
+    @if (Model == null)
+    {
+        <h5 class="display-4">Ошибка заказа.</h5>
+        return;
+    }
+    <form method="post">
+        <div class="col col-12">
+            <h5 class="display-4">Заказ номер</h5>
+            <p class="small">@Model.Id</p>
+            <table class="table">
+                <tr>
+                    <td>Дата и время</td>
+                    <td>@Model.DateTime.ToString("g")</td>
+                </tr>
+                <tr>
+                    <td>Адрес доставки</td>
+                    <td>@Model.OrderUserData.Address</td>
+                </tr>
+                <tr>
+                    <td>Получатель</td>
+                    <td>@Model.OrderUserData.FullName</td>
+                </tr>
+                <tr>
+                    <td>Телефон</td>
+                    <td>@Model.OrderUserData.Phone</td>
+                </tr>
+                <tr>
+                    <td>Сумма</td>
+                    <td>@Model.Cost()</td>
+                </tr>
+                <tr>
+                    <td>Статус заказа</td>
+                    <td>
+                        <select name="orderStatus"
+                            asp-for="@Model.Status"
+                                asp-items="@Html.GetEnumSelectList<Statuses>()"
+                                class="form-control">
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <button class="btn btn-success" type="submit" asp-area="Admin" asp-controller="Order" asp-action="UpdateStatus" asp-route-orderId="@Model.Id">Обновить статус</button>
+        </div>
+    </form>
+</div>

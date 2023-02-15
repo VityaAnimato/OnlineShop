@@ -1,0 +1,42 @@
+﻿@model List<OrderViewModel>
+
+<div class="row">
+    <div class="col col-3">
+        @await Html.PartialAsync("Menu")
+    </div>
+    @if (Model == null)
+    {
+        <h5 class="display-4">Список заказов пуст.</h5>
+        return;
+    }
+    <div class="col col-9">
+        <h5 class="display-4">Список заказов</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Сумма</th>
+                    <th>Статус</th>
+                    <th>Пользователь</th>
+                    <th>Дата</th>
+                    <th>Время</th>
+                    <th>Подробнее</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td></td>
+                        <td>@order.Cost()</td>
+                        <td>@order.Status.ToString()</td>
+                        <td>@order.UserId</td>
+                        <td>@order.DateTime.ToLongDateString()</td>
+                        <td>@order.DateTime.ToShortTimeString()</td>
+                        <td><a asp-area="Admin" asp-controller="Order" asp-action="GetDetails" asp-route-orderId="@order.Id">Подробнее</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

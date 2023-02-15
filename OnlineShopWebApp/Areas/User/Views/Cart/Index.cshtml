@@ -1,0 +1,54 @@
+﻿@model CartViewModel
+@{
+    ViewData["Title"] = "Cart Page";
+}
+
+@if (Model == null || Model.Items.Count == 0)
+{
+    <h5 class="display-4">Корзина пустая.</h5>
+}
+else
+{
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Название позиции</th>
+                        <th>Цена</th>
+                        <th>Количество товара в позиции</th>
+                        <th>Стоимость позиции</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>@item.Product.Name</td>
+                            <td>@item.Product.Cost</td>
+                            <td>@item.Amount</td>
+                            <td>@item.Cost</td>
+                            <td><a class="btn btn-dark" asp-area="User" asp-controller="Cart" asp-action="Add" asp-route-productId="@item.Product.Id" role="button">+</a></td>
+                            <td><a class="btn btn-dark" asp-area="User" asp-controller="Cart" asp-action="RemoveOne" asp-route-productId="@item.Product.Id" role="button">-</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div>
+                <h5 class="display-5">Итого: @Model.Cost</h5>
+
+                <a class="btn btn-dark" asp-area="User" asp-controller="Order" asp-action="Add" role="button">Оформить заказ</a>
+                <a class="btn btn-dark" href="/" role="button">Продолжить покупки</a>
+                <a class="btn btn-dark" asp-area="User" asp-controller="Cart" asp-action="Clear" role="button">Очистить корзину</a>
+            </div>
+        </div>
+    </div>
+
+
+
+}
+
+
+

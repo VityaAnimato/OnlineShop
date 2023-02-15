@@ -1,0 +1,27 @@
+﻿@model UserViewModel
+
+<div class="row">
+    <div class="col col-3">
+        @await Html.PartialAsync("Menu")
+    </div>
+    <div class="col col-9">
+        <h5 class="display-4">Добавьте нового пользователя</h5>
+        <div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
+        <form asp-action="Add" asp-controller="User" asp-area="Admin">
+            <div class="row">
+                <div class="col">
+                    <label asp-for="UserName">Имя пользователя</label><br>
+                    <input type="text" asp-for="UserName"><br>
+                    <span asp-validation-for="UserName"></span><br>
+                    <label asp-for="Password">Пароль</label><br>
+                    <input type="text" asp-for="Password"><br>
+                    <span asp-validation-for="Password"></span><br>
+                    <br>
+                    <input type="submit" value="Добавить"/>
+                    <br>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

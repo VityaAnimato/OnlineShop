@@ -1,0 +1,34 @@
+﻿@model LoginData
+
+<h5 class="display-4">Вход</h5>
+<div class="text-danger font-weight-bold" asp-validation-summary="All"></div>
+
+<form asp-action="Login" asp-controller="Account">
+    <div>
+        <div>
+            <label asp-for="UserName">Логин:</label><br>
+            <input type="text" asp-for="UserName"><br>
+            <span asp-validation-for="UserName"></span>
+        </div>
+        <div>
+            <label asp-for="Password">Пароль:</label><br>
+            <input type="password" asp-for="Password"><br>
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div>
+            <label asp-for="KeepMeSignedIn">Запомнить меня?</label><br>
+            <input type="checkbox" asp-for="KeepMeSignedIn"><br>
+            <span asp-validation-for="KeepMeSignedIn"></span>
+        </div>
+        <div>
+            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl"/>
+        </div>
+        <div>
+            <br>
+            <input type="submit" value="Войти" />
+            <br />
+        </div>
+    </div>
+</form>
+
+<a class="btn btn-outline-info" asp-controller="Account" asp-route-ReturnUrl="@Model.ReturnUrl" asp-action="Register">Регистрация нового пользователя</a>
